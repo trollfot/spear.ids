@@ -2,14 +2,13 @@ from setuptools import setup, find_packages
 from os.path import join
 
 name = 'spear.ids'
-path = "0.1"
-version = open(join(*path)).read().strip()
-readme = open("README.txt").read()
+version = "0.1"
+readme = ""
 history = ""
 
 setup(name = name,
       version = version,
-      description = 'A grok utility to register non AT Plone content type',
+      description = 'Unique id handlers for Spear.',
       long_description = readme[readme.find('\n\n'):] + '\n' + history,
       keywords = 'plone CMS zope',
       author = 'Souheil Chelfouh',

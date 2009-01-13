@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from zope.interface import Interface
+
 
 class IObjectIdResolver(Interface):
     """Manage object id queries.

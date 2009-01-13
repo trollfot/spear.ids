@@ -4,8 +4,9 @@ from five import grok
 from zope.interface import implements
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
+from zope.cachedescriptors.property import CachedProperty
 from persistent.interfaces import IPersistent
-from interfaces import IObjectIdManager
+from interfaces import IObjectIdResolver, IUniqueObjectId
 
 
 class IntIdResolver(grok.GlobalUtility):
@@ -13,21 +14,21 @@ class IntIdResolver(grok.GlobalUtility):
     """
     grok.implements(IObjectIdResolver)
 
-    def __init__(self):
-        self._intidResolver = getUtility(IIntIds).register
-        self._objectResolver = getUtility(IIntIds).getObject
+    @CachedProperty
+    def _intid(self):
+        return getUtility(IIntIds)
 
     def getObjectFromId(self, id):
-        return self._objectResolver(int(id))
+        return self._intid.getObject(int(id))
 
     def getIdFromObject(self, obj):
-        return str(self._intidResolver(obj))
+        return str(self._intid.register(obj))
 
 
 class IntIdAdapter(grok.Adapter):
     """Object id manager using intid.
     """
-    grok.adapts(IPersistent)
+    grok.context(IPersistent)
     grok.implements(IUniqueObjectId)
 
     def UID(self):
