@@ -24,6 +24,7 @@ setup(name = name,
       install_requires=[
           'setuptools',
           'five.grok',
+          'five.intid'
       ],
       classifiers = [
         'Development Status :: 4 - Beta',
