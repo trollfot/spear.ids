@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from five import grok
-from zope.interface import implements
+from zope.interface import Interface
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
-from zope.cachedescriptors.property import CachedProperty
 from persistent.interfaces import IPersistent
+from zope.cachedescriptors.property import CachedProperty
 from interfaces import IObjectIdResolver, IUniqueObjectId
 
 
-class IntIdResolver(grok.GlobalUtility):
+class IntIdResolver(grok.Adapter):
     """Object id manager using intid.
     """
+    grok.context(Interface)
     grok.implements(IObjectIdResolver)
 
     @CachedProperty
