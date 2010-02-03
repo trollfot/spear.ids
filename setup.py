@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from os.path import join
 
 name = 'spear.ids'
-version = "0.1"
+version = "0.2dev"
 readme = ""
 history = ""
 
